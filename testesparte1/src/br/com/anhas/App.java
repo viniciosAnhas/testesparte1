@@ -1,5 +1,8 @@
 package br.com.anhas;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +12,7 @@ public class App {
     static Scanner scanner = new Scanner(System.in);
 
     static List<Pessoa> pessoas;
+    static List<Pessoa> feminino;
     static String nomePessoa1;
     static String sexoPessoa1;
     static String nomePessoa2;
@@ -28,6 +32,9 @@ public class App {
         insersaoGrupo();
 
         System.out.println("Pessoas: " + pessoas);
+        System.out.println(feminino);
+
+//        lista();
 
     }
 
@@ -72,7 +79,7 @@ public class App {
 
     private static void insersaoGrupo() {
 
-        List<Pessoa> feminino = new ArrayList<>();
+        feminino = new ArrayList<>();
 
         GrupoPessoas grupoPessoas = (pessoas) -> {
 
@@ -90,8 +97,33 @@ public class App {
 
         grupoPessoas.analise(pessoas);
 
-        System.out.println("Pessoas do sexo feminino: " + feminino);
+    }
+
+    public static void lista(){
+
+        for (Pessoa pessoa: feminino) {
+
+            System.out.println(pessoa.getSexo());
+
+        }
 
     }
 
+    @Test
+    public void testeListaFeminino() {
+
+        List<Pessoa> femininoTeste = new ArrayList<>();
+        Pessoa pessoaTeste1 = new Pessoa("Maria", "feminino");
+        Pessoa pessoaTeste2 = new Pessoa("Joao", "masculino");
+
+        femininoTeste.add(pessoaTeste1);
+        femininoTeste.add(pessoaTeste2);
+
+        for (Pessoa pessoa: femininoTeste) {
+
+            Assert.assertEquals("feminino", pessoa.getSexo());
+
+        }
+
+    }
 }
